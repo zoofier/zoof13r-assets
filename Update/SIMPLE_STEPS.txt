@@ -1,0 +1,43 @@
+UPDATES — SIMPLE CHECKLIST
+
+What you need (two internet links, both must start with https://)
+
+  A) MANIFEST LINK — You paste this into the app.
+     It is a small JSON file that says "the newest version number" and "where to download the zip".
+
+  B) UPDATE ZIP — You upload this to any HTTPS file host (GitHub Release, your website, cloud storage).
+     The zip contains the new program files. The app will NOT replace your personal data folder "bin".
+
+
+FIVE STEPS
+
+  1. Copy the example file: examples/update/update.manifest.example.json
+
+  2. Edit it in Notepad:
+       - "version"  = must be HIGHER than the version in version.json inside the app folder (e.g. 6.0.1)
+       - "download_url" = direct HTTPS link to your .zip file
+       - "changelog" = short text for users (optional but nice)
+       - "sha256" = optional safety check; compute with:
+           python scripts/compute_update_zip_sha256.py YourUpdate.zip
+
+  3. Put the JSON online so it has an HTTPS link (common: GitHub repo → upload file → use "Raw" URL).
+
+  4. Paste that HTTPS JSON link into the app: Settings → App Settings → Tool Settings → Manifest link.
+
+  5. Click SAVE SETTINGS, then "Update App".
+
+
+GITHUB EXAMPLE (typical pattern)
+
+  Manifest (raw):
+    https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/examples/update/your-update.json
+
+  Zip (release):
+    https://github.com/YOUR_USER/YOUR_REPO/releases/download/v6.0.1/zoof13r-update.zip
+
+
+STUCK?
+
+  • Both links must be HTTPS (not http://).
+  • Version in the JSON must be greater than your installed version.
+  • See update.manifest.example.json for the exact JSON shape.
